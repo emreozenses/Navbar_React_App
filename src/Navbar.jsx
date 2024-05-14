@@ -1,27 +1,42 @@
 import React, { useState } from 'react'
-import { links } from './data';
+import { links,social } from './data';
 import { FaBars } from 'react-icons/fa';
+import logo from './logo.svg';
 
 const Navbar = () => {
 
     const [showLinks,setShowLinks] = useState(true);
 
   return (
-    <section>
+    <nav>
         
-        <div className="links" >
-            {showLinks && links.map((link)=>{
+        <div className="nav-center" >
+            <div className='nav-header'>
+                <img src={logo} alt='logo' className='logo'/>
+            <button 
+            type='button' 
+            onClick={()=>setShowLinks(!showLinks)}
+            className='nav-toggle'
+            >
+                <FaBars/>
+            </button>
+            </div>
+            {showLinks && (<div className='links-container'>
+                <ul className='links'>
+
+            {links.map((link)=>{
                 const {id,url,text} = link;
                 return (
-                  <a href={url} key={id}>
-                    {text}
-                  </a>
+                  <li key={id}>
+                    <a href={url}>{text}</a>
+                  </li>
                 )
             })}
-            </div>
-            <button type='button' onClick={()=>setShowLinks(!showLinks)}><FaBars/></button>
+                </ul>
+            </div>)}
+        </div>
         
-    </section>
+    </nav>
   )
 }
 
